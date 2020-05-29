@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>当前位置(腾讯地图)</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app" v-cloak></div>
+		<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+		<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=QJKBZ-TWQWD-RDI4A-HNAWC-T4BY2-LKF2Y"></script>
+		<script type="text/javascript">
+			var geolocation = new qq.maps.Geolocation("QJKBZ-TWQWD-RDI4A-HNAWC-T4BY2-LKF2Y", "myapp");
+
+			//document.getElementById("pos-area").style.height = (document.body.clientHeight - 110) + 'px';
+			var positionNum = 0;
+			var options = {
+				timeout: 8000
+			};
+
+			function showPosition(position) {
+				console.log(JSON.stringify(position,
+					null, 4))
+					$('#app').html('当前位置：'+position.province+' '+position.city)
+			};
+
+			function showErr() {
+				console.log("定位失败！")
+			};
+
+			function showWatchPosition() {
+				//document.getElementById("demo").innerHTML += "开始监听位置！<br /><br />";
+				//geolocation.watchPosition(showPosition);
+				//document.getElementById("pos-area").scrollTop = document.getElementById("pos-area").scrollHeight;
+			};
+
+			function showClearWatch() {
+				//geolocation.clearWatch();
+				//document.getElementById("demo").innerHTML += "停止监听位置！<br /><br />";
+				//document.getElementById("pos-area").scrollTop = document.getElementById("pos-area").scrollHeight;
+			};
+			geolocation.getLocation(showPosition, showErr, options)
+		</script>
+	</body>
+</html>
